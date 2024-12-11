@@ -1,0 +1,38 @@
+name: Update Docker Services
+
+on:
+  workflow_call:
+    secrets:
+      SERVER_HOST:
+        required: true
+      SERVER_USERNAME:
+        required: true
+      SSH_KEY:
+        required: true
+      SSH_PASSPHRASE:
+        required: true
+    inputs:
+      DOCKER_SERVICE:
+        required: false
+        type: string
+
+jobs:
+  service-update:
+    name: Refresh Docker Containers
+    runs-on: ubuntu-22.04
+    steps:
+
+      - name: Run Docker Commands via SSH
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          script: |
+            echo "Updating service: ${{ inputs.DOCKER_SERVICE }}"
+            echo "Pulling Docker images..."
+            docker compose pull ${{ inputs.DOCKER_SERVICE }}
+            echo "Restarting Docker containers..."
+            docker compose up ${{ inputs.DOCKER_SERVICE }} -d
+            echo "Service update completed successfully."

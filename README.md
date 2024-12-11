@@ -14,6 +14,13 @@ This repository is dedicated to managing Continuous Integration and Continuous D
 - Reusable GitHub Actions workflows.
 - Integration with infrastructure and application repositories.
 
+## Workflows
+
+### Publish Docker Image
+
+**Workflow File:** `publish_docker_image.yml`  
+**Purpose:** Automates the building and publishing of Docker images to a container registry.
+
 ## Usage
 
 Workflows in this repository are designed to be used across multiple repositories in the organization. Refer to individual workflow files for configuration and usage instructions.

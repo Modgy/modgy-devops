@@ -17,7 +17,7 @@ on:
         type: string
 
 jobs:
-  service_update:
+  service-update:
     name: Refresh Docker Containers
     runs-on: ubuntu-22.04
     steps:
